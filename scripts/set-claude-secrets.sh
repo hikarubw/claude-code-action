@@ -67,11 +67,15 @@ if ! gh auth status &> /dev/null; then
     exit 1
 fi
 
+# Get the repository name
+REPO=$(gh repo view --json nameWithOwner -q .nameWithOwner)
+echo -e "${YELLOW}Setting secrets for repository: $REPO${NC}"
+
 # Set the secrets
 echo -e "${YELLOW}Setting GitHub repository secrets...${NC}"
 
 echo -n "Setting CLAUDE_ACCESS_TOKEN... "
-if echo "$ACCESS_TOKEN" | gh secret set CLAUDE_ACCESS_TOKEN; then
+if echo "$ACCESS_TOKEN" | gh secret set CLAUDE_ACCESS_TOKEN -R "$REPO"; then
     echo -e "${GREEN}✓${NC}"
 else
     echo -e "${RED}✗${NC}"
@@ -79,7 +83,7 @@ else
 fi
 
 echo -n "Setting CLAUDE_REFRESH_TOKEN... "
-if echo "$REFRESH_TOKEN" | gh secret set CLAUDE_REFRESH_TOKEN; then
+if echo "$REFRESH_TOKEN" | gh secret set CLAUDE_REFRESH_TOKEN -R "$REPO"; then
     echo -e "${GREEN}✓${NC}"
 else
     echo -e "${RED}✗${NC}"
@@ -87,7 +91,7 @@ else
 fi
 
 echo -n "Setting CLAUDE_EXPIRES_AT... "
-if echo "$EXPIRES_AT" | gh secret set CLAUDE_EXPIRES_AT; then
+if echo "$EXPIRES_AT" | gh secret set CLAUDE_EXPIRES_AT -R "$REPO"; then
     echo -e "${GREEN}✓${NC}"
 else
     echo -e "${RED}✗${NC}"
