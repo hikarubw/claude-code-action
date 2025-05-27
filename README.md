@@ -72,7 +72,7 @@ jobs:
   claude-response:
     runs-on: ubuntu-latest
     steps:
-      - uses: hikarubw/claude-code-action@beta
+      - uses: hikarubw/claude-code-action@oauth
         with:
           use_oauth: true
           claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
@@ -103,7 +103,7 @@ jobs:
   claude-response:
     runs-on: ubuntu-latest
     steps:
-      - uses: hikarubw/claude-code-action@beta
+      - uses: hikarubw/claude-code-action@oauth
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -279,7 +279,7 @@ on:
       - "src/api/**/*.ts"
 
 steps:
-  - uses: hikarubw/claude-code-action@beta
+  - uses: hikarubw/claude-code-action@oauth
     with:
       direct_prompt: |
         Update the API documentation in README.md to reflect
@@ -303,7 +303,7 @@ jobs:
       github.event.pull_request.user.login == 'developer1' ||
       github.event.pull_request.user.login == 'external-contributor'
     steps:
-      - uses: hikarubw/claude-code-action@beta
+      - uses: hikarubw/claude-code-action@oauth
         with:
           direct_prompt: |
             Please provide a thorough review of this pull request.
@@ -396,7 +396,7 @@ Claude does **not** have access to execute arbitrary Bash commands by default. I
 **Note**: If your repository has a `.mcp.json` file in the root directory, Claude will automatically detect and use the MCP server tools defined there. However, these tools still need to be explicitly allowed via the `allowed_tools` configuration.
 
 ```yaml
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     allowed_tools: "Bash(npm install),Bash(npm run test),Edit,Replace,NotebookEditCell"
     disallowed_tools: "TaskOutput,KillTask"
@@ -410,7 +410,7 @@ Claude does **not** have access to execute arbitrary Bash commands by default. I
 Use a specific Claude model:
 
 ```yaml
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     # model: "claude-3-5-sonnet-20241022"  # Optional: specify a different model
     # ... other inputs
@@ -461,7 +461,7 @@ If you're a Claude Max subscriber, you can use OAuth authentication instead of m
 
 3. **Update your workflow** to use OAuth:
    ```yaml
-   - uses: hikarubw/claude-code-action@beta
+   - uses: hikarubw/claude-code-action@oauth
      with:
        use_oauth: true
        claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
@@ -489,7 +489,7 @@ Use provider-specific model names based on your chosen provider:
 
 ```yaml
 # For OAuth authentication (Claude Max)
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     use_oauth: true
     claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
@@ -498,20 +498,20 @@ Use provider-specific model names based on your chosen provider:
     # ... other inputs
 
 # For direct Anthropic API (default)
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
     # ... other inputs
 
 # For Amazon Bedrock with OIDC
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     model: "anthropic.claude-3-7-sonnet-20250219-beta:0" # Cross-region inference
     use_bedrock: "true"
     # ... other inputs
 
 # For Google Vertex AI with OIDC
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     model: "claude-3-7-sonnet@20250219"
     use_vertex: "true"
@@ -537,7 +537,7 @@ Both AWS Bedrock and GCP Vertex AI require OIDC authentication.
     app-id: ${{ secrets.APP_ID }}
     private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     model: "anthropic.claude-3-7-sonnet-20250219-beta:0"
     use_bedrock: "true"
@@ -562,7 +562,7 @@ Both AWS Bedrock and GCP Vertex AI require OIDC authentication.
     app-id: ${{ secrets.APP_ID }}
     private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-- uses: hikarubw/claude-code-action@beta
+- uses: hikarubw/claude-code-action@oauth
   with:
     model: "claude-3-7-sonnet@20250219"
     use_vertex: "true"
