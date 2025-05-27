@@ -61,6 +61,22 @@ inputs:
     description: "Use Google Vertex AI with OIDC authentication instead of direct Anthropic API"
     required: false
     default: "false"
+  use_oauth:
+    description: "Use Claude AI OAuth authentication instead of API key (for Claude Max subscribers)"
+    required: false
+    default: "false"
+  claude_access_token:
+    description: "Claude AI OAuth access token (required when use_oauth is true)"
+    required: false
+    default: ""
+  claude_refresh_token:
+    description: "Claude AI OAuth refresh token (required when use_oauth is true)"
+    required: false
+    default: ""
+  claude_expires_at:
+    description: "Claude AI OAuth token expiration timestamp (required when use_oauth is true)"
+    required: false
+    default: ""
 
   max_turns:
     description: "Maximum number of conversation turns"
@@ -121,7 +137,11 @@ runs:
         mcp_config: ${{ steps.prepare.outputs.mcp_config }}
         use_bedrock: ${{ inputs.use_bedrock }}
         use_vertex: ${{ inputs.use_vertex }}
+        use_oauth: ${{ inputs.use_oauth }}
         anthropic_api_key: ${{ inputs.anthropic_api_key }}
+        claude_access_token: ${{ inputs.claude_access_token }}
+        claude_refresh_token: ${{ inputs.claude_refresh_token }}
+        claude_expires_at: ${{ inputs.claude_expires_at }}
         claude_env: ${{ inputs.claude_env }}
       env:
         # Model configuration
