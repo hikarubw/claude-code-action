@@ -18,7 +18,7 @@ jobs:
           fetch-depth: 1
 
       - name: Auto review PR
-        uses: hikarubw/claude-code-action@main
+        uses: hikarubw/claude-code-action@oauth
         with:
           direct_prompt: |
             Please review this PR. Look at the changes and provide thoughtful feedback on:
