@@ -124,7 +124,7 @@ jobs:
 
 | Input                  | Description                                                                                                          | Required | Default   |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------- | -------- | --------- |
-| `anthropic_api_key`    | Anthropic API key (required for direct API when not using OAuth, not needed for Bedrock/Vertex)                     | No\*     | -         |
+| `anthropic_api_key`    | Anthropic API key (required for direct API when not using OAuth, not needed for Bedrock/Vertex)                      | No\*     | -         |
 | `use_oauth`            | Enable OAuth authentication using Claude Max credentials                                                             | No       | `false`   |
 | `claude_access_token`  | Claude OAuth access token (required when `use_oauth` is true)                                                        | No\*\*   | -         |
 | `claude_refresh_token` | Claude OAuth refresh token (required when `use_oauth` is true)                                                       | No\*\*   | -         |
@@ -141,7 +141,7 @@ jobs:
 | `disallowed_tools`     | Tools that Claude should never use                                                                                   | No       | ""        |
 | `custom_instructions`  | Additional custom instructions to include in the prompt for Claude                                                   | No       | ""        |
 | `mcp_config`           | Additional MCP configuration (JSON string) that merges with the built-in GitHub MCP servers                          | No       | ""        |
-| `assignee_trigger`     | The assignee username that triggers the action (e.g. @claude). Only used for issue assignment                       | No       | -         |
+| `assignee_trigger`     | The assignee username that triggers the action (e.g. @claude). Only used for issue assignment                        | No       | -         |
 | `trigger_phrase`       | The trigger phrase to look for in comments, issue/PR bodies, and issue titles                                        | No       | `@claude` |
 | `claude_env`           | Custom environment variables to pass to Claude Code execution (YAML format)                                          | No       | ""        |
 
