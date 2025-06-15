@@ -24,9 +24,12 @@ jobs:
           fetch-depth: 1
 
       - name: Claude Code Review
-        uses: anthropics/claude-code-action@beta
+        uses: hikarubw/claude-code-action@oauth
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          use_oauth: true
+          claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
+          claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
+          claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
           timeout_minutes: "60"
           direct_prompt: |
             Please review this pull request focusing on the changed files.
